@@ -16,18 +16,22 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-//una orden se genera en varios estados posibles
+            //una orden se genera en varios estados posibles
             $table->foreignId('user_id')->references('id')->on('users');
             $table->string('contact');
             $table->string('phone');
             $table->string('reference')->nullable();
-            $table->enum('status', [Order::PENDIENTE,Order::RECIBIDO, Order::ENVIADO, Order::ENTREGADO,
-                Order::ANULADO])->default(Order::PENDIENTE);
+            $table->enum('status', [
+                Order::PENDIENTE, Order::RECIBIDO, Order::ENVIADO, Order::ENTREGADO,
+                Order::ANULADO
+            ])->default(Order::PENDIENTE);
             $table->enum('envio_type', [1, 2]);
-            $table->float('shipping_cost');
-            $table->float('total');
+
+            $table->decimal('shipping_cost', 10, 0);
+            $table->decimal('total', 10, 0);
+
             $table->json('content');
-            $table->json('envio')->nullable();//almacena el departamento , ciudad, distrito
+            $table->json('envio')->nullable(); //almacena el departamento , ciudad, distrito
             $table->timestamps();
         });
     }

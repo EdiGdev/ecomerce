@@ -32,6 +32,10 @@ class EventServiceProvider extends ServiceProvider
         Logout::class => [
             MergeTheCartLogout::class,
         ],
+        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
+            // ... other providers
+            \SocialiteProviders\Facebook\FacebookExtendSocialite::class.'@handle',
+        ],
     ];
 
     /*No tiene sentido guardar los posibles colores del producto

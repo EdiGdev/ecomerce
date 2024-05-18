@@ -20,32 +20,37 @@ class CreateProduct extends Component
         'description' => 'required',
         'brand_id' => 'required',
         'price' => 'required',
+        'discount' => ['numeric', 'between:0,100'],
     ];
 
     public $categories,  $subcategories = [], $brands = [];
-    public $category_id = '' , $subcategory_id = '', $brand_id = '';
-    public $name, $slug,  $description, $price, $quantity;
+    public $category_id = '', $subcategory_id = '', $brand_id = '';
+    public $name, $slug,  $description, $price, $quantity, $discount = 0;
     public function mount()
     {
-        $this->categories = Category::all();
+        $this->categories = Category::orderBy('id', 'desc')->get();
     }
     public function updatedCategoryId($value)
     {
         $this->subcategories = Subcategory::where('category_id', $value)->get();
 
         //marcas asociadas a las categorias que eh asociado
-        $this->brands = Brand::whereHas('categories', function(Builder $query) use ($value) {//usa la vaariable dentro de la funcion que lleva como parametro
+        $this->brands = Brand::whereHas('categories', function (Builder $query) use ($value) { //usa la vaariable dentro de la funcion que lleva como parametro
             $query->where('category_id', $value);
         })->get();
 
-        $this->reset(['subcategory_id', 'brand_id']);//cada que se actualice una categoria se resetea todo
+        $this->reset(['subcategory_id', 'brand_id']); //cada que se actualice una categoria se resetea todo
     }
-    public function updatedName($value){
+    
+    
+    
+    public function updatedName($value)
+    {
         $this->slug = Str::slug($value);
     }
     //propiedad computada
     public function getSubcategoryProperty()
-    {//busca la subcategory y busca cuyo id coincida
+    { //busca la subcategory y busca cuyo id coincida
         return Subcategory::find($this->subcategory_id);
     }
 
@@ -54,7 +59,7 @@ class CreateProduct extends Component
     {
         if ($this->subcategory_id && !$this->subcategory->color && !$this->subcategory->size) {
             $this->rules['quantity'] = 'required';
-        }//cantidad
+        } //cantidad
 
         $this->validate();
         $product = new Product();
@@ -64,6 +69,8 @@ class CreateProduct extends Component
         $product->price = $this->price;
         $product->subcategory_id = $this->subcategory_id;
         $product->brand_id = $this->brand_id;
+        $product->discount = $this->discount;
+
         if ($this->subcategory_id && !$this->subcategory->color && !$this->subcategory->size) {
             $product->quantity = $this->quantity;
         }

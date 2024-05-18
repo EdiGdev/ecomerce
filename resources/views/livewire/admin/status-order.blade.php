@@ -61,7 +61,7 @@
             <p class="text-lg font-semibold uppercase">Envío</p>
             @if($order->envio_type == 1)
                 <p class="text-sm">Los productos deben ser recogidos en tienda</p>
-                <p class="text-sm">Calle Falsa 123</p>
+                <p class="text-sm">{{ $tienda->direccion_tienda }}</p>
             @else
                 <p class="text-sm">Los productos serán enviados a:</p>
                 <p class="text-sm">{{ $envio->address }}</p>
@@ -107,13 +107,13 @@
                     </div>
                 </td>
                 <td class="text-center">
-                    {{ $item->price }} &euro;
+                    {{ $item->price }} &#36;
                 </td>
                 <td class="text-center">
                     {{ $item->qty }}
                 </td>
                 <td class="text-center">
-                    {{ $item->price * $item->qty }} &euro;
+                    {{ $item->price * $item->qty }} &#36;
                 </td>
             </tr>
         @endforeach

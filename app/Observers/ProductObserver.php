@@ -13,6 +13,7 @@ Si el producto tiene color, hemos de eliminar las tallas que tuviera (en caso de
 las tuviera). Y si no tiene ni talla ni color, eliminamos las posibles relaciones con color y con talla, pues
 podría tener una de las dos (o ninguna, pero no las dos a la vez)
 */
+
 class ProductObserver
 {
     public function updated(Product $product)
@@ -31,4 +32,30 @@ class ProductObserver
             }
         }
     }
+    /*  public function updated(Product $product){
+        $subcategory_id = $product->subcategory_id;
+        $subcategory = Subcategory::find($subcategory_id);
+
+        if ($subcategory->size){
+            if ($product->colors->count()){
+                $product->colors()->detach();
+            }
+        }elseif ($subcategory->color){
+            if ($product->sizes->count()){
+                foreach($product->sizes as $size){
+                    $size->delete();
+                }
+            }
+        }else{
+            if ($product->colors->count()){
+                $product->colors()->detach();
+            }
+
+            if ($product->sizes->count()){
+                foreach($product->sizes as $size){
+                    $size->delete();
+                }
+            }
+        }
+    } */
 }

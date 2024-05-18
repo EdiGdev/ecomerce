@@ -7,6 +7,8 @@ use App\Models\Size;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Livewire\Component;
 
+use function App\qty_available;
+
 class UpdateCartItemSize extends Component
 {
     public $rowId;

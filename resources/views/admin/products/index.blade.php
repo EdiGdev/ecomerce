@@ -2,7 +2,7 @@
 
 <div class="container-menu">
 
-    @livewire('admin.show-products2')
+    @livewire('admin.show-products')
 
 </div>
 

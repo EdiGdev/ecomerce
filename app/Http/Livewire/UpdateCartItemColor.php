@@ -6,6 +6,8 @@ use App\Models\Color;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Livewire\Component;
 
+use function App\qty_available;
+
 class UpdateCartItemColor extends Component
 {
     public $rowId;

@@ -89,17 +89,28 @@
             <x-jet-input-error for="price" />
         </div>
     </div>
+
     {{--Aparce cuando se selcciona subcategory solo si no tiene ni talla ni color--}}
-    @if ($subcategory_id && !$this->subcategory->color && !$this->subcategory->size)
-        <div>
-            <x-jet-label value="Cantidad" />
-            <x-jet-input
-                wire:model="quantity"
-                type="number"
-                class="w-full" />
-            <x-jet-input-error for="quantity" />
-        </div>
-    @endif
+   
+       
+        <div class="grid grid-cols-2 gap-6 mb-4">
+           
+
+            @if ($subcategory_id && !$this->subcategory->color && !$this->subcategory->size)
+            <div>
+                <x-jet-label value="Descuento" />
+                <x-jet-input wire:model="discount" type="number" class="w-full" />
+                <x-jet-input-error for="discount" />
+            </div>
+            <div>
+                <x-jet-label value="Cantidad" />
+                <x-jet-input wire:model="quantity" type="number" class="w-full" />
+                <x-jet-input-error for="quantity" />
+            </div>
+        @endif
+        
+    </div>
+
     {{--Boton --}}
     <div class="flex mt-4">
         <x-jet-button

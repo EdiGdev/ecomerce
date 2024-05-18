@@ -16,14 +16,17 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $role = Role::create(['name' => 'admin']);
+        $role1 = Role::create(['name' => 'admin']);
+        $role2 = Role::create(['name' => 'cliente']);
+        $role3 = Role::create(['name' => 'recarga']);
+
         User::factory()->create([
-            'name' => 'Tay',
-            'email' => 'tayrel@gmail.com',
-            'password'=> Hash::make('12345678')
+            'name' => 'Edison Guzman',
+            'email' => 'Edisonvpn17@gmail.com',
+            'password' => Hash::make('123456789')
 
         ])->assignRole('admin');
 
-        User::factory(100)->create();
+        //User::factory(100)->create();
     }
 }

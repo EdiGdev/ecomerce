@@ -1,9 +1,9 @@
 <div>
-<x-slot name="header">
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight capitalize">
-        Ciudad: {{$city->name}}
-    </h2>
-</x-slot>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight capitalize">
+            Ciudad: {{ $city->name }}
+        </h2>
+    </x-slot>
     <div class="container-menu py-12">
         <x-jet-form-section submit="save" class="mb-6">
             <x-slot name="title">
@@ -40,25 +40,27 @@
             <x-slot name="content">
                 <table class="text-gray-600">
                     <thead class="border-b border-gray-300">
-                    <tr class="text-left">
-                        <th class="py-2 w-full">Nombre</th>
-                        <th class="py-2">Acción</th>
-                    </tr>
+                        <tr class="text-left">
+                            <th class="py-2 w-full">Nombre</th>
+                            <th class="py-2">Acción</th>
+                        </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-300">
-                    @foreach ($districts as $district)
-                        <tr>
-                            <td class="py-2">
-                                {{$district->name}}
-                            </td>
-                            <td class="py-2">
-                                <div class="flex divide-x divide-gray-300 font-semibold">
-                                    <a class="pr-2 hover:text-blue-600 cursor-pointer" wire:click="edit({{$district}})">Editar</a>
-                                    <a class="pl-2 hover:text-red-600 cursor-pointer" wire:click="$emit('deleteDistrict', {{ $district->id }})">Eliminar</a>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
+                        @foreach ($districts as $district)
+                            <tr>
+                                <td class="py-2">
+                                    {{ $district->name }}
+                                </td>
+                                <td class="py-2">
+                                    <div class="flex divide-x divide-gray-300 font-semibold">
+                                        <a class="pr-2 hover:text-blue-600 cursor-pointer"
+                                            wire:click="edit({{ $district }})">Editar</a>
+                                        <a class="pl-2 hover:text-red-600 cursor-pointer"
+                                            wire:click="$emit('deleteDistrict', {{ $district->id }})">Eliminar</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </x-slot>
@@ -89,19 +91,21 @@
         <script>
             Livewire.on('deleteDistrict', districtId => {
                 Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
+                    title: '¿Querés eliminar esta distrito?',
+                    text: "No podrás deshacer esto!",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
+                    confirmButtonText: 'Ok, dale',
+                    cancelButtonText: 'Mejor no',
                 }).then((result) => {
                     if (result.isConfirmed) {
                         Livewire.emitTo('admin.show-city', 'delete', districtId)
+                    
                         Swal.fire(
-                            'Deleted!',
-                            'Your file has been deleted.',
+                            '¡Eliminado!',
+                            'El distrito fue eliminada.',
                             'success'
                         )
                     }

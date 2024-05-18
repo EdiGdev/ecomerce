@@ -25,7 +25,7 @@ class DepartmentComponent extends Component
     }
     public function getDepartments()
     {
-        $this->departments = Department::all();
+        $this->departments = Department::orderBy('id', 'desc')->get();
     }
     public function save()
     {

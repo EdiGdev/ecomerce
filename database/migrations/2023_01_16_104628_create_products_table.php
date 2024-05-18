@@ -21,12 +21,14 @@ class CreateProductsTable extends Migration
             $table->string('slug');
             $table->text('description');
 
-            $table->float('price');
+            $table->decimal('price', 10, 0);
 
             $table->foreignId('subcategory_id')->references('id')->on('subcategories')->onDelete('cascade');
             $table->foreignId('brand_id')->references('id')->on('brands')->on('brands')->onDelete('cascade');;
 
             $table->integer('quantity')->nullable();
+
+            $table->integer('discount')->default(0);
 
             //guarda el estado del producto que esta borrado y publicado
             $table->enum('status', [Product::BORRADOR, Product::PUBLICADO])->default(Product::BORRADOR);

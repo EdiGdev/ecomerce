@@ -22,8 +22,18 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
+            $table->string('unique_code')->unique()->nullable();
+            $table->unsignedBigInteger('referrer_id')->nullable();
+            $table->decimal('commission_earned', 10, 2)->default(0); // Columna para comisiones ganadas
+            $table->unsignedInteger('referral_level')->default(0); // Nivel de referido
+            $table->string('phone')->unique()->nullable();
             $table->timestamps();
+        
+            // Agrega una relación para rastrear el referente
+            $table->foreign('referrer_id')->references('id')->on('users');
         });
+        
+        
     }
 
     /**

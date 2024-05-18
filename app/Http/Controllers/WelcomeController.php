@@ -22,7 +22,8 @@ class WelcomeController extends Controller
             }
         }
 
-        $categories = Category::all();
+        $categories = Category::orderBy('id', 'desc')->get();
+
         return view('welcome', compact('categories'));
     }
 }

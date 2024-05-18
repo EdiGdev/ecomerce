@@ -22,7 +22,7 @@ class ProductFactory extends Factory
          Pero la marca está en una categoría de debe de tener como una
         de sus subcategorías a la del product*/
         $name = $this->faker->sentence(2);
-        $subcategory =   Subcategory::all()->random()  ;             // Subcategory::all()->random();
+        $subcategory =   Subcategory::all()->random();             // Subcategory::all()->random();
 
         $category = $subcategory->category;
         $brand = $category->brands->random();
@@ -31,10 +31,10 @@ class ProductFactory extends Factory
             'name' => $name,
             'slug' => Str::slug($name),
             'description' => $this->faker->text(),
-            'price' => $this->faker->randomElement([19.99, 49.99, 99.99]),
+            'price' => $this->faker->randomFloat(20, 99, 149, 754, 1000),
             'subcategory_id' => $subcategory->id,
             'brand_id' => $brand->id,
-            'quantity'=> $subcategory->color ? null : 15,
+            'quantity' => $subcategory->color ? null : 15,
             'status' => 2
         ];
     }

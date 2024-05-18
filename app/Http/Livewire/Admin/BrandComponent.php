@@ -8,10 +8,10 @@ use App\Models\Brand;
 class BrandComponent extends Component
 {
     public $brands, $brand;
-    public $createForm=[
+    public $createForm = [
         'name' => null
     ];
-    public $editForm=[
+    public $editForm = [
         'open' => false,
         'name' => null
     ];
@@ -29,7 +29,7 @@ class BrandComponent extends Component
     }
     public function getBrands()
     {
-        $this->brands = Brand::all();
+        $this->brands = Brand::orderBy('id', 'desc')->get();
     }
     public function save()
     {

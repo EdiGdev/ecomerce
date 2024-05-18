@@ -59,13 +59,13 @@ class CreateCategory extends Component
     }
     public function getBrands()
     {
-        $this->brands = Brand::all();
+        $this->brands = Brand::orderBy('id', 'desc')->get();
     }
     public function save()
     {
         $this->validate();
 
-        $image = $this->createForm['image']->store('categories', 'public');//vrea una imagen y subirla
+        $image = $this->createForm['image']->store('categories', 'public');//crea una imagen y subirla
         $category = Category::create([
             'name' => $this->createForm['name'],
             'slug' => $this->createForm['slug'],
@@ -99,6 +99,7 @@ class CreateCategory extends Component
         $this->editForm['image'] = $category->image;
         $this->editForm['brands'] = $category->brands->pluck('id');//trae uno de los campos ,es una coleccion
     }
+
     public function update(){
         $rules = [
             'editForm.name' => 'required',
@@ -106,9 +107,11 @@ class CreateCategory extends Component
             'editForm.icon' => 'required',
             'editForm.brands' => 'required',
         ];
+
         if ($this->editImage) {
             $rules['editImage'] = 'required|image|max:1024';
         }
+
         $this->validate($rules);
 
         if ($this->editImage) {
@@ -120,13 +123,14 @@ class CreateCategory extends Component
         $this->reset(['editForm', 'editImage']);
         $this->getCategories();
     }
+    
     public function updatedEditFormName($value)
     {
         $this->editForm['slug'] = Str::slug($value);
     }
     public function getCategories()
     {
-        $this->categories = Category::all();
+        $this->categories = Category::orderBy('id', 'desc')->get();
     }
     public function delete(Category $category)
     {

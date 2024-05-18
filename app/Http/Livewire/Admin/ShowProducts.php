@@ -25,7 +25,8 @@ class ShowProducts extends Component
         $products = Product::query()
             ->applyFilters([
                 'search'=>$this->search
-            ])->paginate(10);
+            ])->orderBy('id', 'desc')
+            ->paginate(10);
 
             return view('livewire.admin.show-products', compact('products'))
             ->layout('layouts.admin');

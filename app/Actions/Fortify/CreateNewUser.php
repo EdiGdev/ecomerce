@@ -3,6 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
+use App\Notifications\WelcomeNotification;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
@@ -18,19 +19,34 @@ class CreateNewUser implements CreatesNewUsers
      * @param  array  $input
      * @return \App\Models\User
      */
+
+
     public function create(array $input)
     {
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ])->validate();
 
-        return User::create([
+        $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
+            'phone' => $input['phone'],
         ]);
+
+        // Asignar el rol de "cliente" al usuario
+        $user->assignRole('cliente');
+         
+        $user->notify(new WelcomeNotification(['email' => $input['email'], 'password' => $input['password']], $user->unique_code));
+        
+        $user->loadCachedAddress();
+        
+        return $user;
+
+        
     }
 }

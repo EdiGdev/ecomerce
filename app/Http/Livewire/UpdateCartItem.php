@@ -5,6 +5,8 @@ namespace App\Http\Livewire;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Livewire\Component;
 
+use function App\qty_available;
+
 class UpdateCartItem extends Component
 {
     public $rowId;

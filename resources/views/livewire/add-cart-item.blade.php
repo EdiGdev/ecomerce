@@ -28,7 +28,7 @@
                       wire:loading.attr="disabled"
                       wire:target="addItem"
                       class="w-full"
-                      color="orange">
+                      color="blue">
                 Agregar al carrito de compras
             </x-button>
         </div>

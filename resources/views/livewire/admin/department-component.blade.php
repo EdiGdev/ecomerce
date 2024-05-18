@@ -84,13 +84,14 @@
         <script>
             Livewire.on('deleteDepartment', departmentId => {
                 Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
+                    title: '¿Querés eliminar este departamento?',
+                    text: "No podrás deshacer esto!",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
+                    confirmButtonText: 'Ok, dale',
+                    cancelButtonText: 'Mejor no',
                 }).then((result) => {
                     if (result.isConfirmed) {
                         Livewire.emitTo('admin.department-component', 'delete', departmentId)

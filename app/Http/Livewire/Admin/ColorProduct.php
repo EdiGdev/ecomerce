@@ -19,7 +19,7 @@ class ColorProduct extends Component
     protected $listeners = ['delete'];
     public function mount()
     {
-        $this->colors = Color::all();
+        $this->colors = Color::orderBy('id', 'desc')->get();
     }
 
     public function save()

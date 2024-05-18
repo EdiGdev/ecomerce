@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
-    //define que campos no quiero que se quede con la asignacion masiva
+  
     protected $guarded = ['id', 'created_at', 'updated_at', 'status'];
     const PENDIENTE = 1;
     const RECIBIDO = 2;
@@ -32,6 +32,10 @@ class Order extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    
+    public function paymentInfo(){
+        return $this->hasOne(PaymentInfo::class);
     }
 
 }

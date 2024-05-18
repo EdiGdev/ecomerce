@@ -9,7 +9,7 @@ class Navigation extends Component
 {
     public function render()
     {
-        $categories = Category::all();
+        $categories = Category::orderBy('id', 'desc')->get();
         return view('livewire.navigation', compact('categories'));
     }
 }

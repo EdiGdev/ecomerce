@@ -2,6 +2,15 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\CategorySeeder;
+use Database\Seeders\ColorProductSeeder;
+use Database\Seeders\ColorSeeder;
+use Database\Seeders\ColorSizeSeeder;
+use Database\Seeders\DepartmentSeeder;
+use Database\Seeders\ProductSeeder;
+use Database\Seeders\SizeSeeder;
+use Database\Seeders\SubcategorySeeder;
+use Database\Seeders\UserSeeder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,6 +33,7 @@ class DatabaseSeeder extends Seeder
         Storage::disk('public')->makeDirectory('products');
 
         $this->call(UserSeeder::class);
+        $this->call(BrandSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(SubcategorySeeder::class);
         $this->call(ProductSeeder::class);
@@ -32,5 +42,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SizeSeeder::class);
         $this->call(ColorSizeSeeder::class);
         $this->call(DepartmentSeeder::class);
+       // $this->call(RoleSeeder::class);
     }
 }

@@ -1,19 +1,60 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-@import "container.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'container.css';
+@import 'nav.css';
+
+@import 'form.css';
+@import 'ckeditor.css';
+
+@import 'estilos.css';
+
+
 @layer components {
     .container-menu {
         @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
     }
-    #navigation-menu{
+
+    #navigation-menu {
         height: calc(100vh - 4rem);
     }
-    .navigation-link:hover .navigation-submenu{
+
+    .navigation-link:hover .navigation-submenu {
         display: block !important;
     }
-    .form-control{
-        @apply border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md
-        shadow-sm;
+
+    .form-control {
+        @apply border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm;
+    }
+
+    .journal-scroll::-webkit-scrollbar {
+        width: 4px;
+        cursor: pointer;
+
+    }  
+
+    .journal-scroll::-webkit-scrollbar-track {
+        background-color: rgba(229, 231, 235, var(--bg-opacity));
+        cursor: pointer;
+
+    }
+
+    .journal-scroll::-webkit-scrollbar-thumb {
+        cursor: pointer;
+        background-color: #a0aec0;
+
+    }
+
+    .card {
+        --tw-bg-opacity: 1;
+        background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+        --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / .1), 0 8px 10px -6px rgb(0 0 0 / .1);
+        --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+        box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    }
+
+    .card-body {
+        padding: 1.5rem 1rem;
     }
 }

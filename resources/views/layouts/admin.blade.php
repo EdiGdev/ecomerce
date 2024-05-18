@@ -23,7 +23,7 @@
 
 
     <!-- Scripts -->
-    <script src="{{ mix('js/app.js') }}" defer></script>
+    
     <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
     {{-- dropzone--}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
@@ -52,5 +52,22 @@
 
 <!--colocar el código JS de la vista welcome para que se cargue en el layout usando las directivasde blade-->
 @stack('scripts')
+
+<script src="{{ mix('js/app.js') }}" defer onload="inicializarLaravelEcho()"></script>
+
+    @auth
+        @if (Auth::check())
+            <script>
+                function inicializarLaravelEcho() {
+                    Echo.private('App.Models.User.{{ Auth::user()->id }}')
+                        .notification((notification) => {
+                            window.livewire.emit('notification');
+                        });
+                }
+            </script>
+        @endif
+    @endauth
+
+
 </body>
 </html>

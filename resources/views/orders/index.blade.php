@@ -102,7 +102,7 @@
                                 </span>
                                 <br>
                                 <span class="text-sm">
-                                    {{$order->total}} &euro;
+                                    {{$order->total}} &#36;
                                 </span>
                             </div>
                             <span>
